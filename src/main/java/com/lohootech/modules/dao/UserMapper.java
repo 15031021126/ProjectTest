@@ -28,13 +28,12 @@ public interface UserMapper {
     List<User> selectAll();
 
     /**
-     * 1
+     * 查询男女比例
      * @return
      */
     List<PersonCount>   getPersonCount();
 
     /**、	统计每个公司有多少人员
-     *
      * @return
      */
     List<CompanyCount>  getCompanyCount();
