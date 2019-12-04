@@ -5,78 +5,81 @@
     <title>用户管理系统</title>
 </head>
 <body>
-<h2>用户管理系统</h2>
+<div align="center">
+    <h2>用户管理系统</h2>
+    <a href="http://localhost:8080/selectAll">json</a>
+</div>
 <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
 <script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.4.0/jquery.js"></script>
 
 <script src="js/jquery.js"></script>
 
 <script>
-        $(function () {
-            $.ajax({
-                url: 'http://localhost:8080/selectAll',
-                type: 'get',
-                dataType: 'json',
-                success: function (data) {
-                    //打印全部的数据
-                    console.log(data.body)
-                    if (data.status == 0) {
-                        console.log(data.msg)
-                        //data.data指的是数组，数组里是8个对象，i为数组的索引
-                        for(i in data.body) {
-                            var tr;
-                            tr='<td>'+data.body[i].phone+'</td>\'+<td>'+data.body[i].name+'</td>'+'<td>'+data.body[i].sex+'</td>'+'</td>'
-                          +'<td>'+data.body[i].age+'</td>\'+<td>'+data.body[i].address+'</td>'+'<td>'+data.body[i].companyName+'</td>'+'</td>'
+    $(function () {
+        $.ajax({
+            url: 'http://localhost:8080/selectAll',
+            type: 'get',
+            dataType: 'json',
+            success: function (data) {
+                //打印全部的数据
+                console.log(data.body)
+                if (data.status == 0) {
+                    console.log(data.msg)
+                    //data.data指的是数组，数组里是8个对象，i为数组的索引
+                    for (i in data.body) {
+                        var tr;
+                        tr = '<td>' + data.body[i].phone + '</td>\'+<td>' + data.body[i].name + '</td>' + '<td>' + data.body[i].sex + '</td>' + '</td>'
+                            + '<td>' + data.body[i].age + '</td>\'+<td>' + data.body[i].address + '</td>' + '<td>' + data.body[i].companyName + '</td>' + '</td>'
 
-                          +'<td id="cc">'        +data.body[i].status+'</td>\'+         <td>'
-                            $("#table_user").append('<tr>'+tr+'</tr>')
-                        }
-                    } else {
-                        console.log("失败！")
+                            + '<td id="cc">' + data.body[i].status + '</td>\'+         <td>'
+                        $("#table_user").append('<tr>' + tr + '</tr>')
                     }
+                } else {
+                    console.log("失败！")
                 }
-            })
-            $.ajax({
-                url: 'http://localhost:8080/getCompanyCount',
-                type: 'get',
-                dataType: 'json',
-                success: function (data) {
-                    //打印全部的数据
-                    console.log(data.body)
-                    if (data.status == 0) {
-                        console.log(data.msg)
-                        //data.data指的是数组，数组里是8个对象，i为数组的索引
-                        for (i in data.body) {
-                            var tr;
-                            tr = '<td>' + data.body[i].companyName + '</td>\'+<td>' + data.body[i].count + '</td>' + '<td>'
-                            $("#table_CompanyCount").append('<tr>' + tr + '</tr>')
-                        }
-                    } else {
-                        console.log("失败！")
-                    }
-                }
-            })
-            $.ajax({
-                url: 'http://localhost:8080/getPersonCount',
-                type: 'get',
-                dataType: 'json',
-                success: function (data) {
-                    //打印全部的数据
-                    console.log(data.body)
-                    if (data.status == 0) {
-                        console.log(data.msg)
-                        //data.data指的是数组，数组里是8个对象，i为数组的索引
-                        for (i in data.body) {
-                            var tr;
-                            tr = '<td>' + data.body[i].man_count + '</td>\'+<td>' + data.body[i].woman_count + '</td>' + '<td>'
-                            $("#table_SexCount").append('<tr>' + tr + '</tr>')
-                        }
-                    } else {
-                        console.log("失败！")
-                    }
-                }
-            })
+            }
         })
+        $.ajax({
+            url: 'http://localhost:8080/getCompanyCount',
+            type: 'get',
+            dataType: 'json',
+            success: function (data) {
+                //打印全部的数据
+                console.log(data.body)
+                if (data.status == 0) {
+                    console.log(data.msg)
+                    //data.data指的是数组，数组里是8个对象，i为数组的索引
+                    for (i in data.body) {
+                        var tr;
+                        tr = '<td>' + data.body[i].companyName + '</td>\'+<td>' + data.body[i].count + '</td>' + '<td>'
+                        $("#table_CompanyCount").append('<tr>' + tr + '</tr>')
+                    }
+                } else {
+                    console.log("失败！")
+                }
+            }
+        })
+        $.ajax({
+            url: 'http://localhost:8080/getPersonCount',
+            type: 'get',
+            dataType: 'json',
+            success: function (data) {
+                //打印全部的数据
+                console.log(data.body)
+                if (data.status == 0) {
+                    console.log(data.msg)
+                    //data.data指的是数组，数组里是8个对象，i为数组的索引
+                    for (i in data.body) {
+                        var tr;
+                        tr = '<td>' + data.body[i].man_count +"%"+ '</td>\'+<td>' + data.body[i].woman_count+"%" + '</td>' + '<td>'
+                        $("#table_SexCount").append('<tr>' + tr + '</tr>')
+                    }
+                } else {
+                    console.log("失败！")
+                }
+            }
+        })
+    })
 </script>
 <table class="table table-bordered" id='table_user'>
     <tr>
@@ -90,18 +93,28 @@
     </tr>
 </table>
 <!--/http://localhost:8080/getCompanyCount-->
-<h2>查询公司下的人数</h2>
+<div align="center">
+    <h3>查询公司下的人数</h3>
+    <a href="http://localhost:8080/getCompanyCount">json</a>
+
+</div>
+
 <table class="table table-bordered" id='table_CompanyCount'>
     <tr>
         <th>公司</th>
         <th>人数</th>
     </tr>
 </table>
-<h2>查询男女各个的人数</h2>
+
+<div align="center">
+    <h3>查询男女比例</h3>
+    <a href="http://localhost:8080/getPersonCount">json</a>
+
+</div>
 <table class="table table-bordered" id='table_SexCount'>
     <tr>
         <th>男</th>
-        <th></th>女</th>
+        <th>女</th>
     </tr>
 </table>
 

@@ -1,5 +1,6 @@
 package com.lohootech.api.controller;
 
+import com.lohootech.modules.entity.PersonCount;
 import com.lohootech.modules.entity.User;
 import com.lohootech.modules.entity.base.ServerResponse;
 import com.lohootech.modules.service.UserService;
@@ -81,7 +82,15 @@ public class UserController {
     @ResponseBody
     @CrossOrigin
     public ServerResponse getPersonCount(){
-        return ServerResponse.createBySuccess("查询成功",userService.getPersonCount());
+        List<PersonCount> personCount = userService.getPersonCount();
+        for (int i = 0; i < personCount.size(); i++) {
+            double manCount = personCount.get(i).getMan_count();
+            double womanCount = personCount.get(i).getWoman_count();
+            double total = manCount + womanCount;
+            personCount.get(i).setMan_count((int) ((manCount/total)*100));
+            personCount.get(i).setWoman_count((int) ((womanCount/total)*100));
+        }
+        return ServerResponse.createBySuccess("查询成功",personCount);
     }
 
     /**
